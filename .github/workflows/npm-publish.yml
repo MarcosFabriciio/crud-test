@@ -1,0 +1,28 @@
+name: Continous Delivery ReactJS
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  CD:
+    name: Continuous Delivery
+    runs-on: ubuntu-20.04
+    steps:
+      - name: SSH into production server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{secrets.SSH_KEY}}
+          port: 22
+          script: |
+            cd crud-test
+            git pull origin master
+            npm install
+            npm run build
+            cp -a build/ /var/www/html/
+            systemctl reload nginx
