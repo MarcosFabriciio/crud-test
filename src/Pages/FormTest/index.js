@@ -16,7 +16,7 @@ const FormTest = () => {
                 method: 'post',
                 url: 'http://localhost:4803/clientes/cadastrar',
                 data: formData,
-                headers: 'Access-Control-Allow-Origin': "*"
+                headers: {'Access-Control-Allow-Origin': "*"}
             })
 
             console.log(response)
