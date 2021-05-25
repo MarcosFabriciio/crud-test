@@ -14,9 +14,8 @@ const FormTest = () => {
             e.preventDefault()
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:4803/clientes/cadastrar',
+                url: 'http://167.172.243.156:4803/clientes/cadastrar',
                 data: formData,
-                headers: {'Access-Control-Allow-Origin': "*"}
             })
 
             console.log(response)
