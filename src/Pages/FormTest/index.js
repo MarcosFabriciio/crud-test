@@ -15,7 +15,8 @@ const FormTest = () => {
             const response = await axios({
                 method: 'post',
                 url: 'http://localhost:4803/clientes/cadastrar',
-                data: formData 
+                data: formData,
+                headers: 'Access-Control-Allow-Origin': "*"
             })
 
             console.log(response)
