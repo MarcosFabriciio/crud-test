@@ -22,3 +22,7 @@ tr a {
 tr a:hover {
    text-decoration: none;
 }
+
+.pagination { 
+   margin-top: 2rem;
+}

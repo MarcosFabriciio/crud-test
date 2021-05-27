@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import CustomMenu from "../../Componentes/CustomMenu";
 import axios from "axios";
 import "./styles.css"
-import Pag from "../../Componentes/Pagination";
+import { Pagination } from "react-bootstrap"
 
 
 export default function Clientes() {
@@ -16,7 +16,7 @@ export default function Clientes() {
       setBuscar(value)
    }
 
-   async function deletarCliente(e, id) {
+   async function deletarCliente(id) {
       try {
          await axios({
             method: 'delete',
@@ -28,7 +28,7 @@ export default function Clientes() {
       }
    }
 
-   const requestData = async (e, param = '') => {
+   const requestData = async (e, param = '', page = 1) => {
       try {
          if (e) {
             e.preventDefault();
@@ -36,7 +36,10 @@ export default function Clientes() {
          const { data } = await axios({
             method: 'get',
             url: 'http://167.172.243.156:4803/clientes/listar',
-            params: { nome: param }
+            params: {
+               nome: param,
+               page: page
+            }
          })
          setClientes(data.data)
          console.log(data.paginator)
@@ -100,10 +103,41 @@ export default function Clientes() {
                         })}
                      </tbody>
                   </table>
-                  <Pag page={page} />
+                  <div>
+                     <Pagination className="pagination justify-content-center">
+                        <Pagination.First onClick={(e) => requestData(e, buscar, 1)} />
+                        <Pagination.Prev disabled={page.current === 1 ? true : false} onClick={(e) => requestData(e, buscar, page.current - 1)} />
+                        {
+                           page.current >= 3 ? (
+                              <Pagination.Ellipsis disabled={true} />
+                           ) : null
+                        }
+                        {
+                           page.current >= 2 ? (
+                              <Pagination.Item onClick={(e) => requestData(e, buscar, page.current - 1)}>
+                                 {page.current - 1}
+                              </Pagination.Item>
+                           ) : null
+                        }
+                        <Pagination.Item active>{page.current}</Pagination.Item>
+                        {
+                           page.total - page.current >= 1 ? (
+                              <Pagination.Item onClick={(e) => requestData(e, buscar, page.current + 1)}>
+                                 {page.current + 1}
+                              </Pagination.Item>
+                           ) : null
+                        }
+                        {
+                           page.total - page.current >= 2 ? (
+                              <Pagination.Ellipsis disabled={true} />
+                           ) : null
+                        }
+                        <Pagination.Next disabled={page.current === page.total ? true : false} onClick={(e) => requestData(e, buscar, page.current + 1)} />
+                        <Pagination.Last onClick={(e) => requestData(e, buscar, page.total)} />
+                     </Pagination>
+                  </div>
                </>
             )}
       </div>
    );
 }
-
