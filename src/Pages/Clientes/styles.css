@@ -1,0 +1,28 @@
+.input-group {
+   width: 50%;
+   margin: 1rem;
+}
+
+.table {
+   margin: 0 1rem;
+}
+
+tr button {
+   background: none;
+   border: none;
+   color: blue;
+}
+
+tr a {
+   color: blue;
+   outline: none;
+   margin-right: 0.8rem;
+}
+
+tr a:hover {
+   text-decoration: none;
+}
+
+.pagination { 
+   margin-top: 2rem;
+}
