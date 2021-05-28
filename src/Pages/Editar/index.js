@@ -21,7 +21,7 @@ export default function Editar(props) {
          e.preventDefault()
          const response = await axios({
             method: 'put',
-            url: `http://167.172.243.156:4803/clientes/alterar/${clienteId}`,
+            url: `http://209.97.146.187:4803/clientes/alterar/${clienteId}`,
             data: userData,
          })
          console.log(response)
@@ -35,7 +35,7 @@ export default function Editar(props) {
       try {
          const { data } = await axios({
             method: 'get',
-            url: `http://167.172.243.156:4803/clientes/buscar/${clienteId}`,
+            url: `http://209.97.146.187:4803/clientes/buscar/${clienteId}`,
          })
          setUserData(data.data)
       } catch (error) {

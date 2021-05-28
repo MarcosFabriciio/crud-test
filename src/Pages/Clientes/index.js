@@ -20,7 +20,7 @@ export default function Clientes() {
       try {
          await axios({
             method: 'delete',
-            url: `http://167.172.243.156:4803/clientes/excluir/${id}`,
+            url: `http://209.97.146.187:4803/clientes/excluir/${id}`,
          })
          window.location.reload()
       } catch (error) {
@@ -35,7 +35,7 @@ export default function Clientes() {
          }
          const { data } = await axios({
             method: 'get',
-            url: 'http://167.172.243.156:4803/clientes/listar',
+            url: 'http://209.97.146.187:4803/clientes/listar',
             params: {
                nome: param,
                page: page

@@ -17,7 +17,7 @@ const FormTest = () => {
          e.preventDefault()
          const response = await axios({
             method: 'post',
-            url: 'http://167.172.243.156:4803/clientes/cadastrar',
+            url: 'http://209.97.146.187:4803/clientes/cadastrar',
             data: formData,
          })
          console.log(response)
