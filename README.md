@@ -2,7 +2,7 @@
 
 Pacotes e ferramentas necessárias para deploy da aplicação e API.
 
-| Plugin | README |
+| Ferramenta | Página de Download |
 | ------ | ------ |
 | .Net SDK | https://dotnet.microsoft.com/download/dotnet/3.1|
 | NodeJS | https://nodejs.org/en/download/|
