@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+## Pacotes e ferramentas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pacotes e ferramentas necessárias para deploy da aplicação e API.
 
-## Available Scripts
+| Plugin | README |
+| ------ | ------ |
+| .Net SDK | https://dotnet.microsoft.com/download/dotnet/3.1|
+| NodeJS | https://nodejs.org/en/download/|
+| Nginx | http://nginx.org/en/download.html|
+| PM2 | https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/|
+| MySql Server | https://dev.mysql.com/downloads/installer/|
 
-In the project directory, you can run:
+## Instalação dos pacotes essenciais para rodar a API e o Site no server.
 
-### `yarn start`
+Instale o NodeJS e em seguida verifique se o NPM foi instalado junto:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+sudo apt-get install nodejs
+npm -v
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Caso o NPM não esteja instalado, instale-o em seguida:
 
-### `yarn test`
+```sh
+sudo apt-get install npm
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Use o NPM para instalar o PM2 em nivel global, vamos utilizar-lo para gerenciar nossa API:
 
-### `yarn build`
+```sh
+npm install pm2 -g
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Instalando o .Net SDK e configurando acesso à API.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Baixe os arquivos dos repositórios da Microsoft necessários para instalar o .Net SDK:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+wget -q packages-microsoft-prod.deb https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+```
 
-### `yarn eject`
+Em seguida baixe e instale o SDK e o Runtime do .Net:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-3.1
+sudo apt-get install dotnet-runtime-3.1
+sudo apt-get install aspnetcore-runtime-3.1
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Instalação e configuração do MySql Server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```sh
+sudo apt-get install mysql-server -y
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Caso não inicie a configuração inicial do MySql, rode o comando abaixo e selecione as seguintes opções:
 
-## Learn More
+```sh
+sudo mysql_secure_installation
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Opção | Resposta |
+| ------ | ------ |
+| Would you like to setup VALIDATE PASSWORD component? | n |
+| Please set the password for root here | _insira sua senha aqui_|
+| Remove anonymous users? | y |
+| PM2Disallow root login remotely | n |
+| Remove test database and access to it? | y |
+| Reload privilege table now? | y |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Em seguida acesse o mysql e altere a senha do root, saia e então reinicie o Sql Server:
 
-### Code Splitting
+```sh
+mysql -u root
+mysql> Alter user 'root'@'localhost' identified with caching_sha2_password by 'root'
+mysql> exit
+sudo systemctl restart mysql
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Agora abra o arquivo mencionado abaixo e comente a linha que contem `bind-address=127.0.0.1` para liberar o acesso remoto ao Sql Server:
 
-### Analyzing the Bundle Size
+```sh
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Ligar o firewall e configurar as portas necessárias:
 
-### Making a Progressive Web App
+```sh
+ufw enable
+sudo ufw allow ssh
+sudo ufw allow 3306/tcp
+sudo ufw allow 4803/tcp
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Em seguida você deve acessar o Sql Server remotamente o banco de dados no qual a api vai acessar, para isso siga o tutorial abaixo:
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Mysql Workbench acesso remoto com SSH](https://tecdicas.com/como-acessar-um-servidor-mysql-usando-um-tunel-ssh-no-windows/)
