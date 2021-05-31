@@ -2,7 +2,7 @@
 
 Pacotes e ferramentas necessárias para deploy da aplicação e API.
 
-| Ferramenta | Página de Download |
+| Plugin | README |
 | ------ | ------ |
 | .Net SDK | https://dotnet.microsoft.com/download/dotnet/3.1|
 | NodeJS | https://nodejs.org/en/download/|
@@ -96,6 +96,30 @@ sudo ufw allow 3306/tcp
 sudo ufw allow 4803/tcp
 ```
 
-Em seguida você deve acessar o Sql Server remotamente o banco de dados no qual a api vai acessar, para isso siga o tutorial abaixo:
+Em seguida você deve acessar o MySql Server remotamente o banco de dados no qual a api vai acessar, para isso siga o tutorial abaixo:
 
 [Mysql Workbench acesso remoto com SSH](https://tecdicas.com/como-acessar-um-servidor-mysql-usando-um-tunel-ssh-no-windows/)
+
+### Publicar a api .Net Core
+
+Utilize os comandos abaixo para dar build na sua API:
+
+```sh
+git clone ${url do repositório da sua aplicação}
+cd ${pasta do repositório da sua aplicação}
+dotnet publish -c Release
+cd /obj/Release/netcoreapp3.1/
+pm2 start “dotnet ${nome da sua aplicação}.dll --urls=http://*:4803” –name ${nome da sua aplicação}
+```
+
+Em seguida verifique no PM2 se a sua aplicação esta rodando corretamenta:
+
+```sh
+pm2 list
+```
+
+Agora só testar em algum cliente de API utilizando o IP da sua máquina SSH e um endpoint definido por você na API.
+
+
+
+
