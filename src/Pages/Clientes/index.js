@@ -42,7 +42,6 @@ export default function Clientes() {
             }
          })
          setClientes(data.data)
-         console.log(data.paginator)
          setPage(data.paginator)
       } catch (error) {
          alert(error)

@@ -5,7 +5,7 @@ import './index.css'
 
 const CustomMenu = () => {
    return (
-      <>
+      <div className="nav-container">
          <Navbar bg="light" expand="lg" fixed="top">
             <Navbar.Brand href="/">
                <img
@@ -19,14 +19,13 @@ const CustomMenu = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                <Nav>
-                  <Nav.Link href="/"> Página Inicial </Nav.Link>
-                  <Nav.Link> Alterar Senha </Nav.Link>
+                  <Nav.Link href="/clientes"> Página Inicial </Nav.Link>
+                  <Nav.Link href="/">Cadastrar </Nav.Link>
                   <Nav.Link> Usuário: admin </Nav.Link>
                   <Nav.Link> Sair </Nav.Link>
                </Nav>
             </Navbar.Collapse>
          </Navbar>
-
          <Nav id="secondary-nav">
             <NavDropdown title="Tabelas" className="nav-dropdown">
                <NavDropdown.Item >Action</NavDropdown.Item>
@@ -84,7 +83,7 @@ const CustomMenu = () => {
                <NavDropdown.Item >Separated link</NavDropdown.Item>
             </NavDropdown>
          </Nav>
-      </>
+      </div>
    );
 }
 
