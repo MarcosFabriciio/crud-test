@@ -96,7 +96,7 @@ export default function Clientes() {
                                  <td>{cliente.cpfCnpj}</td>
                                  <td>
                                     <Link to={`/editar/${cliente.id}`}>Editar</Link>
-                                    <button onClick={(e) => deletarCliente(e, cliente.id)}>Deletar</button>
+                                    <button onClick={() => deletarCliente(cliente.id)}>Deletar</button>
                                  </td>
                               </tr>
                            )
