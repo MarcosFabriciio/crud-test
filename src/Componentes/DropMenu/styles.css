@@ -1,0 +1,120 @@
+.menu {
+   display: flex;
+}
+
+.navbar {
+   position: absolute;
+   align-items: baseline;
+   z-index: 10;
+   background-color: #fff;
+}
+
+.navbar-collapse {
+   align-items: baseline;
+}
+
+.logo img{
+   width: 35px;
+   height: 35px;
+   margin-left: 1.2rem;
+}
+
+.main{
+   font-size: 2rem;
+   font-weight: 600;
+   margin-left: 0.5rem;
+   font-family: 'Noto Sans KR', sans-serif;
+   color: #000E75;
+}
+
+/* mobile */
+@media only screen and (max-width: 766px) {
+   .navbar {
+      flex-direction: row;
+      position: absolute;
+      top: 0;
+      flex: 1;
+      width: 100%;
+      justify-content: space-between;
+      border-bottom: 10px inset #000E75;
+   }
+
+   .menu {
+      width: 100vw;
+      height: 2rem;
+   }
+ }
+ 
+ /* desktop */
+ @media only screen and (min-width: 767px) {
+   .navbar {
+      height: 100vh;
+      flex-direction: column;
+      position: absolute;
+      border-right: 10px solid #000E75;
+   }
+
+   .menu {
+      width: 16rem;
+      height: 100vh;
+   }
+ }
+   .btn-toggle {
+      display: inline-flex;
+      align-items: center;
+      padding: .25rem .5rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, .65);
+      background-color: transparent;
+      border: 0;
+   }
+   .btn-toggle:hover,
+   .btn-toggle:focus {
+      color: rgba(0, 0, 0, .85);
+      background-color: #f0f0f0;
+   }
+   
+   .btn-toggle::before {
+      width: 1.25em;
+      line-height: 0;
+      content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+      transition: transform .35s ease;
+      transform-origin: .5em 50%;
+   }
+   
+   .btn-toggle[aria-expanded="true"] {
+      color: rgba(0, 0, 0, .85);
+   }
+   .btn-toggle[aria-expanded="true"]::before {
+      transform: rotate(90deg);
+   }
+   
+   .btn-toggle-nav a {
+      display: inline-flex;
+      padding: .1875rem .5rem;
+      margin-top: .125rem;
+      margin-left: 1.25rem;
+      text-decoration: none;
+   }
+   .btn-toggle-nav a:hover,
+   .btn-toggle-nav a:focus {
+      background-color: #f0f0f0;
+   }
+   
+   .scrollarea {
+      overflow-y: auto;
+   }
+   
+   .fw-semibold { font-weight: 600; }
+   .lh-tight { line-height: 1.25; }
+
+   .btn-initial {
+      display: flex;
+      align-items: center;
+   }
+
+   .btn-initial svg {
+      margin-right: 0.5rem;
+
+   }
+   

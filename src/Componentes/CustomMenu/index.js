@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
-import navLogo from '../../Assets/Images/navLogo.png'
+import navLogo from '../../Assets/Images/logo-atlante.png'
 import './index.css'
 
 const CustomMenu = () => {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-import CustomMenu from "../../Componentes/CustomMenu";
 import axios from "axios";
 import "./styles.css"
 import { Pagination } from "react-bootstrap"
+import DropMenu from "../../Componentes/DropMenu";
 
 
 export default function Clientes() {
@@ -14,6 +14,12 @@ export default function Clientes() {
    function buscarNome(event) {
       const value = event.target.value
       setBuscar(value)
+   }
+
+   const buscarEnter = (event) => {
+      if (event.keyCode === 13) {
+         requestData(event, buscar)
+      }
    }
 
    async function deletarCliente(id) {
@@ -53,30 +59,31 @@ export default function Clientes() {
    }, [])
 
    return (
-      <div>
-         <CustomMenu />
-
-         <div className="input-group">
-            <input
-               className="form-control"
-               type="text"
-               placeholder="Digite o nome"
-               onChange={buscarNome}
-               defaultValue={buscar}
-            />
-            <div className="input-group-append">
-               <button
-                  onClick={(e) => requestData(e, buscar)}
-                  type="button" className="btn btn-primary"
-               >
-                  Buscar
-               </button>
-            </div>
-         </div>
+      <div className="clientes-container">
+         <DropMenu />
 
          {clientes === null ? "" :
             (
-               <>
+               <div className="home-container">
+
+                  <div className="input-group">
+                     <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Digite o nome"
+                        onChange={buscarNome}
+                        onKeyDown={(e) => buscarEnter(e)}
+                        defaultValue={buscar}
+                     />
+                     <div className="input-group-append">
+                        <button
+                           onClick={(e) => requestData(e, buscar)}
+                           type="button" className="btn btn-primary"
+                        >
+                           Buscar
+                        </button>
+                     </div>
+                  </div>
                   <table className="table">
                      <thead>
                         <tr>
@@ -102,40 +109,38 @@ export default function Clientes() {
                         })}
                      </tbody>
                   </table>
-                  <div>
-                     <Pagination className="pagination justify-content-center">
-                        <Pagination.First onClick={(e) => requestData(e, buscar, 1)} />
-                        <Pagination.Prev disabled={page.current === 1 ? true : false} onClick={(e) => requestData(e, buscar, page.current - 1)} />
-                        {
-                           page.current >= 3 ? (
-                              <Pagination.Ellipsis disabled={true} />
-                           ) : null
-                        }
-                        {
-                           page.current >= 2 ? (
-                              <Pagination.Item onClick={(e) => requestData(e, buscar, page.current - 1)}>
-                                 {page.current - 1}
-                              </Pagination.Item>
-                           ) : null
-                        }
-                        <Pagination.Item active>{page.current}</Pagination.Item>
-                        {
-                           page.total - page.current >= 1 ? (
-                              <Pagination.Item onClick={(e) => requestData(e, buscar, page.current + 1)}>
-                                 {page.current + 1}
-                              </Pagination.Item>
-                           ) : null
-                        }
-                        {
-                           page.total - page.current >= 2 ? (
-                              <Pagination.Ellipsis disabled={true} />
-                           ) : null
-                        }
-                        <Pagination.Next disabled={page.current === page.total ? true : false} onClick={(e) => requestData(e, buscar, page.current + 1)} />
-                        <Pagination.Last onClick={(e) => requestData(e, buscar, page.total)} />
-                     </Pagination>
-                  </div>
-               </>
+                  <Pagination className="">
+                     <Pagination.First onClick={(e) => requestData(e, buscar, 1)} />
+                     <Pagination.Prev disabled={page.current === 1 ? true : false} onClick={(e) => requestData(e, buscar, page.current - 1)} />
+                     {
+                        page.current >= 3 ? (
+                           <Pagination.Ellipsis disabled={true} />
+                        ) : null
+                     }
+                     {
+                        page.current >= 2 ? (
+                           <Pagination.Item onClick={(e) => requestData(e, buscar, page.current - 1)}>
+                              {page.current - 1}
+                           </Pagination.Item>
+                        ) : null
+                     }
+                     <Pagination.Item active>{page.current}</Pagination.Item>
+                     {
+                        page.total - page.current >= 1 ? (
+                           <Pagination.Item onClick={(e) => requestData(e, buscar, page.current + 1)}>
+                              {page.current + 1}
+                           </Pagination.Item>
+                        ) : null
+                     }
+                     {
+                        page.total - page.current >= 2 ? (
+                           <Pagination.Ellipsis disabled={true} />
+                        ) : null
+                     }
+                     <Pagination.Next disabled={page.current === page.total ? true : false} onClick={(e) => requestData(e, buscar, page.current + 1)} />
+                     <Pagination.Last onClick={(e) => requestData(e, buscar, page.total)} />
+                  </Pagination>
+               </div>
             )}
       </div>
    );
