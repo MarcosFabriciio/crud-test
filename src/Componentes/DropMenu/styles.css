@@ -2,16 +2,16 @@
    display: flex;
 }
 
-.navbar {
+/* .navbar {
    position: absolute;
    align-items: baseline;
    z-index: 10;
    background-color: #fff;
-}
+} */
 
-.navbar-collapse {
+/* .navbar-collapse {
    align-items: baseline;
-}
+} */
 
 .logo img{
    width: 35px;
@@ -24,20 +24,19 @@
    font-weight: 600;
    margin-left: 0.5rem;
    font-family: 'Noto Sans KR', sans-serif;
-   color: #000E75;
+   /* color: #000E75; */
 }
 
 /* mobile */
 @media only screen and (max-width: 766px) {
-   .navbar {
+   /* .navbar {
       flex-direction: row;
       position: absolute;
       top: 0;
       flex: 1;
       width: 100%;
       justify-content: space-between;
-      border-bottom: 10px inset #000E75;
-   }
+   } */
 
    .menu {
       width: 100vw;
@@ -47,12 +46,11 @@
  
  /* desktop */
  @media only screen and (min-width: 767px) {
-   .navbar {
+   /* .navbar {
       height: 100vh;
       flex-direction: column;
       position: absolute;
-      border-right: 10px solid #000E75;
-   }
+   } */
 
    .menu {
       width: 16rem;

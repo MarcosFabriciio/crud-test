@@ -1,5 +1,6 @@
 .clientes-container{
    display: flex;
+   flex-direction: column;
 }
 
 .home-container{
@@ -19,7 +20,8 @@
    flex-direction: column;
    align-items: center;
    justify-content: center;
-
+ 
+   margin: 0 auto;
    border-radius: 10px;
    border: 2px solid #dee2e6;
 }
@@ -73,9 +75,6 @@ tr a:hover {
  
  /* desktop */
 @media only screen and (min-width: 767px) {
-   .home-container {
-      margin-left: 17rem;
-   }
 
    .input-group {
       width: 50%;

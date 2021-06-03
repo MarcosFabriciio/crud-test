@@ -6,13 +6,13 @@ import './index.css'
 const CustomMenu = () => {
    return (
       <div className="nav-container">
-         <Navbar bg="light" expand="lg" fixed="top">
+         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/">
                <img
                   alt="Home Page"
                   src={navLogo}
                   width="194"
-                  height="50"
+                  height="45"
                   className="d-inline-block align-top"
                />
             </Navbar.Brand>

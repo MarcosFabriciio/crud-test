@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import axios from "axios";
 import "./styles.css"
 import { Pagination } from "react-bootstrap"
-import DropMenu from "../../Componentes/DropMenu";
+import CustomMenu from "../../Componentes/CustomMenu";
 
 
 export default function Clientes() {
@@ -60,7 +60,7 @@ export default function Clientes() {
 
    return (
       <div className="clientes-container">
-         <DropMenu />
+         <CustomMenu />
 
          {clientes === null ? "" :
             (

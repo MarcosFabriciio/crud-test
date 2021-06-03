@@ -1,4 +1,3 @@
-import { useState, createRef, useEffect } from 'react';
 import navLogo from '../../Assets/Images/miniLogo.png'
 import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai"
 
@@ -9,13 +8,12 @@ function DrawerMenu() {
       <div className="borda">
          <ul className="list-unstyled borda-container">
             <li class="logo drawer-item">
-               <a href="/" className="btn btn-initial drawer-link">
+               <a href="/" className="btn btn-initial border-bottom drawer-link">
                   <span className="">
                      <img
                         alt="Home pag"
                         src={navLogo}
                      />
-
                   </span>
                   <span className="drawer-text main">atlante</span>
                </a>
