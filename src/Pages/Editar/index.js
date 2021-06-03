@@ -48,7 +48,7 @@ export default function Editar(props) {
    }, [])
 
    if (redirect) {
-      return <Redirect to="/clientes" />
+      return <Redirect to="/home" />
    }
 
    return (
@@ -159,12 +159,17 @@ export default function Editar(props) {
                   <Form.Label>Nome Representante</Form.Label>
                   <Form.Control type="text" onChange={handleChange} defaultValue={userData?.nomeRepresentante} />
                </Form.Group>
-               <Row>
-                  <Col md={{ span: 1, offset: 10 }}>
-                     <Button variant="primary" type="submit">
-                        Alterar
-                     </Button>
-                  </Col>
+               <Row  className="d-flex flex-row-reverse">
+                  <Button variant="primary" type="submit">
+                     Alterar
+                  </Button>
+                  <Button 
+                     style={{ marginRight: "10px" }}
+                     variant="danger"
+                     onClick={() => setRedirect(true)}
+                  >
+                     Cancelar
+                  </Button>
                </Row>
             </Form>
          </Col>

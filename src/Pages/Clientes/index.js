@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import axios from "axios";
 import "./styles.css"
 import { Pagination } from "react-bootstrap"
 import CustomMenu from "../../Componentes/CustomMenu";
+import CrudContext from "../../Context/context";
 
 
 export default function Clientes() {
    const [clientes, setClientes] = useState(null);
    const [buscar, setBuscar] = useState(null);
    const [page, setPage] = useState({});
+   const {activateCliente} = useContext(CrudContext);
 
    function buscarNome(event) {
       const value = event.target.value
@@ -57,12 +59,13 @@ export default function Clientes() {
    useEffect(() => {
       requestData();
    }, [])
-
+   
+   console.log(activateCliente);
    return (
       <div className="clientes-container">
          <CustomMenu />
 
-         {clientes === null ? "" :
+         {activateCliente &&
             (
                <div className="home-container">
 
@@ -94,7 +97,8 @@ export default function Clientes() {
                         </tr>
                      </thead>
                      <tbody>
-                        {clientes.map(cliente => {
+                        {clientes === null ? "" :
+                           clientes.map(cliente => {
                            return (
                               <tr key={cliente.id}>
                                  <td>{cliente.id}</td>

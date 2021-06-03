@@ -64,7 +64,7 @@ export default function DropMenu() {
                         <div className={showHome} id="home-collapse">
                            <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                               <li><a href="/" className="link-dark rounded">Adicionar</a></li>
-                              <li><a href="/clientes" className="link-dark rounded">Listar clientes</a></li>
+                              <li><a href="/home" className="link-dark rounded">Listar clientes</a></li>
                            </ul>
                         </div>
                      </li>

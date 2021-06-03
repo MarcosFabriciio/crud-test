@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
 import navLogo from '../../Assets/Images/logo-atlante.png'
 import './index.css'
+import CrudContext from "../../Context/context";
 
 const CustomMenu = () => {
+   const { activate } = useContext(CrudContext);
    return (
       <div className="nav-container">
          <Navbar bg="light" expand="lg">
@@ -19,7 +21,7 @@ const CustomMenu = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                <Nav>
-                  <Nav.Link href="/clientes"> Página Inicial </Nav.Link>
+                  <Nav.Link href="/home"> Página Inicial </Nav.Link>
                   <Nav.Link href="/">Cadastrar </Nav.Link>
                   <Nav.Link> Usuário: admin </Nav.Link>
                   <Nav.Link> Sair </Nav.Link>
@@ -33,9 +35,9 @@ const CustomMenu = () => {
                <NavDropdown.Item >Separated link</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Cadastros" className="nav-dropdown">
-               <NavDropdown.Item >Action</NavDropdown.Item>
-               <NavDropdown.Divider />
-               <NavDropdown.Item >Separated link</NavDropdown.Item>
+               <NavDropdown.Item onClick={() => activate()}>
+                     Clientes
+               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Atividades" className="nav-dropdown">
                <NavDropdown.Item >Action</NavDropdown.Item>

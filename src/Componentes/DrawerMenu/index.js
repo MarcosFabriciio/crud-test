@@ -1,13 +1,16 @@
+import {useContext} from "react";
 import navLogo from '../../Assets/Images/miniLogo.png'
 import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai"
+import CrudContext from "../../Context/context";
 
 import './styles.css';
 
 function DrawerMenu() {
+   const { activate } = useContext(CrudContext);
    return (
       <div className="borda">
          <ul className="list-unstyled borda-container">
-            <li class="logo drawer-item">
+            <li className="logo drawer-item">
                <a href="/" className="btn btn-initial border-bottom drawer-link">
                   <span className="">
                      <img
@@ -19,7 +22,7 @@ function DrawerMenu() {
                </a>
             </li>
             <li className="drawer-item">
-               <a href="/clientes" className="btn btn-initial border-bottom drawer-link">
+               <a href="/home" className="btn btn-initial border-bottom drawer-link">
                   <AiOutlineHome size={25} color="white" />
                   <span className="drawer-text">
                      Página Inicial
@@ -27,7 +30,7 @@ function DrawerMenu() {
                </a>
             </li>
             <li className="drawer-item">
-               <a href="/" className="btn btn-initial border-bottom drawer-link">
+               <a onClick={() => activate()}className="btn btn-initial border-bottom drawer-link">
                   <AiOutlineUsergroupAdd size={25} color="white" />
                   <span className="drawer-text">
                      Adicionar Cliente

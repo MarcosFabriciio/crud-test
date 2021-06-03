@@ -6,14 +6,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Clientes from './Pages/Clientes';
 import Editar from './Pages/Editar';
+import {CrudProvider} from "../src/Context/context"; 
 
 ReactDOM.render(
    <React.StrictMode>
-      <Router>
-         <Route exact path="/" component={App} />
-         <Route path="/clientes" component={Clientes} />
-         <Route path="/editar/:id" component={Editar} />
-      </Router>
+      <CrudProvider>
+         <Router>
+            <Route exact path="/" component={App} />
+            <Route path="/home" component={Clientes} />
+            <Route path="/editar/:id" component={Editar} />
+         </Router>
+      </CrudProvider>
    </React.StrictMode>,
    document.getElementById('root')
 );

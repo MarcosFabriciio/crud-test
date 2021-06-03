@@ -55,10 +55,6 @@ tr a:hover {
 }
 
 @media only screen and (max-width: 766px) {
-   .clientes-container{
-      padding-top: 6rem;
-   }
-
    .home-container {
       margin-left: 0;
    }
@@ -75,7 +71,6 @@ tr a:hover {
  
  /* desktop */
 @media only screen and (min-width: 767px) {
-
    .input-group {
       width: 50%;
    }
