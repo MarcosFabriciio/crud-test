@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Clientes from './Pages/Clientes';
 import Editar from './Pages/Editar';
 import {CrudProvider} from "../src/Context/context"; 
+import Login from './Pages/Login';
 
 ReactDOM.render(
    <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route path="/home" component={Clientes} />
             <Route path="/editar/:id" component={Editar} />
+            <Route path="/login" component={Login}/>
          </Router>
       </CrudProvider>
    </React.StrictMode>,

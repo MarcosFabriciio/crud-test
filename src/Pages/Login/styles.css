@@ -1,0 +1,29 @@
+.form-login {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-login nav{
+    padding: 1.5rem 2rem;
+}
+
+.form-nav a{
+    cursor: pointer;
+}
+.barra {
+    height: 6px;
+    background: linear-gradient(to right, rgb(0, 23, 231) 0%, rgb(0, 247, 206) 50%, rgb(150, 255, 154) 100%);
+}
+
+
+.form-body {
+    width: 500px;
+    padding: 2rem;
+    margin: 4rem auto;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(0,0,0,0.40);
+    border-radius: 4px;
+}

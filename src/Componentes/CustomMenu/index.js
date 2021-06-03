@@ -24,7 +24,7 @@ const CustomMenu = () => {
                   <Nav.Link href="/home"> Página Inicial </Nav.Link>
                   <Nav.Link href="/">Cadastrar </Nav.Link>
                   <Nav.Link> Usuário: admin </Nav.Link>
-                  <Nav.Link> Sair </Nav.Link>
+                  <Nav.Link href="/login"> Login </Nav.Link>
                </Nav>
             </Navbar.Collapse>
          </Navbar>
