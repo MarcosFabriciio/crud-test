@@ -179,3 +179,8 @@ systemctl reload nginx
 
 ###### Pronto, você ja deve ser capaz de acessar a sua aplicação ReactJS em seu navegador, basta digitar o endereço do dominio que você configurou.
 
+
+### Opcional
+
+Caso seja de seu interesse configure as chaves SSH para acessar o servidor e realizar configurações clicando [nesse link](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/to-account/).
+ 
