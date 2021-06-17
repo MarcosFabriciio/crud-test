@@ -81,7 +81,7 @@ mysql> exit
 sudo systemctl restart mysql
 ```
 
-Agora abra o arquivo mencionado abaixo e comente a linha que contem `bind-address=127.0.0.1` para liberar o acesso remoto ao Sql Server:
+Agora abra o arquivo mencionado abaixo e comente a linha que contém `bind-address=127.0.0.1` para liberar o acesso remoto ao Sql Server:
 
 ```sh
 sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -120,6 +120,62 @@ pm2 list
 
 Agora só testar em algum cliente de API utilizando o IP da sua máquina SSH e um endpoint definido por você na API.
 
+### Instalar e configurar o Nginx
+
+```sh
+sudo apt-get update
+sudo apt-get install nginx
+```
+
+Em seguida liberar o nginx no firewall:
+
+```sh
+sudo ufw allow 'Nginx Full'
+```
+
+Agora vamos configurar os arquivos do Nginx, abra o arquivo com um editor de texto de sua preferência:
+
+```sh
+sudo nano /etc/nginx/sites-available/default
+```
+
+Em seguida procure a linha que contém  `server_name` e altere o endereço para um dominio que você tenha escolhido, para saber como adicionar um dominio ao Digital Ocean [clique aqui!](https://docs.digitalocean.com/products/networking/dns/how-to/add-domains/). Substitua `example.com` pelo seu dominio.
+
+```sh
+. . .
+
+server_name example.com www.example.com;
+
+. . .
+```
+
+Verifique se a configuração do Nginx está correta e em seguida reinicie o mesmo para aplicar as mudanças: 
+
+```sh
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Agora ao acessar o seu dominio pelo navegador, você deverá ver a tela de boas-vindas do Nginx.
 
 
+### Publicar aplicação ReactJS
+
+Clone seu repositório do Github na qual está armazenada a sua aplicação ReactJS na pasta `/~` do servidor. Em seguida rode os comandos abaixo para dar build na sua aplicação:
+
+```sh
+cd ${nome-da-sua-aplicação}
+git pull origin master
+npm install
+npm run build
+```
+
+Em seguida vamos substituir os arquivos defaults do Nginx pelos da nossa aplicação que acabamos de buildar, e em seguida reiniciar o Nginx: 
+
+```sh
+cp -a build/* /var/www/html/
+systemctl reload nginx
+```
+
+###### Pronto, você ja deve ser capaz de acessar a sua aplicação ReactJS em seu navegador, basta digitar o endereço do dominio que você configurou.
 
