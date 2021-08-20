@@ -51,6 +51,8 @@ sudo apt-get install dotnet-runtime-3.1
 sudo apt-get install aspnetcore-runtime-3.1
 ```
 
+#### Atenção, configurar o SQL somente se o banco não estiver sendo utilizado como serviço (caso Eduzz)
+
 Instalação e configuração do MySql Server:
 
 ```sh
@@ -139,12 +141,29 @@ Agora vamos configurar os arquivos do Nginx, abra o arquivo com um editor de tex
 sudo nano /etc/nginx/sites-available/default
 ```
 
-Em seguida procure a linha que contém  `server_name` e altere o endereço para um dominio que você tenha escolhido, para saber como adicionar um dominio ao Digital Ocean [clique aqui!](https://docs.digitalocean.com/products/networking/dns/how-to/add-domains/). Substitua `example.com` pelo seu dominio.
+Em seguida procure a linha que contém  `server_name` e altere o endereço para um dominio que você tenha escolhido, para saber como adicionar um dominio ao Digital Ocean [clique aqui!](https://docs.digitalocean.com/products/networking/dns/how-to/add-domains/). Em seguida adicione dois blocos de location logo abaixo, um para a API e um para a aplicação ReactJS, eles vão ser os subdomain. Substituia `root` para o endereço da pasta `build/` da sua aplicação ReactJS
 
 ```sh
 . . .
 
-server_name example.com www.example.com;
+server_name ${seu-domain};
+
+location / {
+        root /var/www/${nome-da-sua-aplicação};
+        index index.html;
+        try_files $uri $uri/ /index.html;
+}
+
+location /api/ {
+        proxy_pass http://127.0.0.1:18919/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Conecction keep-alive;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+}
 
 . . .
 ```
@@ -170,17 +189,12 @@ npm install
 npm run build
 ```
 
-Em seguida vamos substituir os arquivos defaults do Nginx pelos da nossa aplicação que acabamos de buildar, e em seguida reiniciar o Nginx: 
+Em seguida vamos copiar os arquivos para a pasta que criamos na pasta `/var/www` do linux, e em seguida reiniciar o Nginx: 
 
 ```sh
-cp -a build/* /var/www/html/
+cp -a build/* /var/www/bfreewebui/
 systemctl reload nginx
 ```
 
 ###### Pronto, você ja deve ser capaz de acessar a sua aplicação ReactJS em seu navegador, basta digitar o endereço do dominio que você configurou.
 
-
-### Opcional
-
-Caso seja de seu interesse configure as chaves SSH para acessar o servidor e realizar configurações clicando [nesse link](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/to-account/).
- 
