@@ -95,7 +95,6 @@ Ligar o firewall e configurar as portas necessárias:
 ufw enable
 sudo ufw allow ssh
 sudo ufw allow 3306/tcp
-sudo ufw allow 4803/tcp
 ```
 
 Em seguida você deve acessar o MySql Server remotamente o banco de dados no qual a api vai acessar, para isso siga o tutorial abaixo:
