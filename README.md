@@ -1,3 +1,6 @@
+##### A configuração abaixo serve para deploy da aplicação em ambos os servidores, tanto de teste como de produção.
+##### Para deploy no ambiente de teste é necessário também a configuração do MySQL, instruções no final do arquivo.
+
 ## Pacotes e ferramentas
 
 Pacotes e ferramentas necessárias para deploy da aplicação e API.
@@ -50,56 +53,6 @@ sudo apt-get install dotnet-sdk-3.1
 sudo apt-get install dotnet-runtime-3.1
 sudo apt-get install aspnetcore-runtime-3.1
 ```
-
-#### Atenção, configurar o SQL somente se o banco não estiver sendo utilizado como serviço (caso Eduzz)
-
-Instalação e configuração do MySql Server:
-
-```sh
-sudo apt-get install mysql-server -y
-```
-
-Caso não inicie a configuração inicial do MySql, rode o comando abaixo e selecione as seguintes opções:
-
-```sh
-sudo mysql_secure_installation
-```
-
-| Opção | Resposta |
-| ------ | ------ |
-| Would you like to setup VALIDATE PASSWORD component? | n |
-| Please set the password for root here | _insira sua senha aqui_|
-| Remove anonymous users? | y |
-| PM2Disallow root login remotely | n |
-| Remove test database and access to it? | y |
-| Reload privilege table now? | y |
-
-Em seguida acesse o mysql e altere a senha do root, saia e então reinicie o serviço do MySql:
-
-```sh
-mysql -u root
-mysql> Alter user 'root'@'localhost' identified with caching_sha2_password by 'root'
-mysql> exit
-sudo systemctl restart mysql
-```
-
-Agora abra o arquivo mencionado abaixo e comente a linha que contém `bind-address=127.0.0.1` para liberar o acesso remoto ao Sql Server:
-
-```sh
-sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
-```
-
-Ligar o firewall e configurar as portas necessárias:
-
-```sh
-ufw enable
-sudo ufw allow ssh
-sudo ufw allow 3306/tcp
-```
-
-Em seguida você deve acessar o MySql Server remotamente o banco de dados no qual a api vai acessar, para isso siga o tutorial abaixo:
-
-[Mysql Workbench acesso remoto com SSH](https://tecdicas.com/como-acessar-um-servidor-mysql-usando-um-tunel-ssh-no-windows/)
 
 ### Publicar a api .Net Core
 
@@ -207,4 +160,60 @@ systemctl reload nginx
 ```
 
 ###### Pronto, você ja deve ser capaz de acessar a sua aplicação ReactJS em seu navegador, basta digitar o endereço do dominio que você configurou.
+
+
+
+#### Para configurar o deploy em ambiente de teste é necessário instalar também o MySql
+#### Atenção, configurar o MySQL somente se o banco não estiver sendo utilizado como serviço (caso Eduzz)
+
+Instalação e configuração do MySql Server:
+
+```sh
+sudo apt-get install mysql-server -y
+```
+
+Caso não inicie a configuração inicial do MySql, rode o comando abaixo e selecione as seguintes opções:
+
+```sh
+sudo mysql_secure_installation
+```
+
+| Opção | Resposta |
+| ------ | ------ |
+| Would you like to setup VALIDATE PASSWORD component? | n |
+| Please set the password for root here | _insira sua senha aqui_|
+| Remove anonymous users? | y |
+| PM2Disallow root login remotely | n |
+| Remove test database and access to it? | y |
+| Reload privilege table now? | y |
+
+Em seguida acesse o mysql e altere a senha do root, saia e então reinicie o serviço do MySql:
+
+```sh
+mysql -u root
+mysql> Alter user 'root'@'localhost' identified with caching_sha2_password by 'root'
+mysql> exit
+sudo systemctl restart mysql
+```
+
+Agora abra o arquivo mencionado abaixo e comente a linha que contém `bind-address=127.0.0.1` para liberar o acesso remoto ao Sql Server:
+
+```sh
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+Ligar o firewall e configurar as portas necessárias:
+
+```sh
+ufw enable
+sudo ufw allow ssh
+sudo ufw allow 3306/tcp
+```
+
+Em seguida você deve acessar o MySql Server remotamente o banco de dados no qual a api vai acessar, para isso siga o tutorial abaixo:
+
+[Mysql Workbench acesso remoto com SSH](https://tecdicas.com/como-acessar-um-servidor-mysql-usando-um-tunel-ssh-no-windows/)
+
+
+
 
