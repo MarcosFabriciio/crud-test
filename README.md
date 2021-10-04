@@ -163,8 +163,8 @@ systemctl reload nginx
 
 
 
-#### Para configurar o deploy em ambiente de teste é necessário instalar também o MySql
-#### Atenção, configurar o MySQL somente se o banco não estiver sendo utilizado como serviço (caso Eduzz)
+# Para configurar o deploy em ambiente de teste é necessário instalar também o MySql
+# Atenção, configurar o MySQL somente se o banco não estiver sendo utilizado como serviço (caso Eduzz)
 
 Instalação e configuração do MySql Server:
 
