@@ -110,8 +110,17 @@ Utilize os comandos abaixo para dar build na sua API:
 git clone ${url do repositório da sua aplicação}
 cd ${pasta do repositório da sua aplicação}
 dotnet publish -c Release
-cd /obj/Release/netcoreapp3.1/
-pm2 start “dotnet ${nome da sua aplicação}.dll --urls=http://*:4803” –name ${nome da sua aplicação}
+cd /obj/Release/netcoreapp3.1/ 
+pm2 start “dotnet ${nome da sua aplicação}.dll --urls=http://*:${porta da sua aplicação}” –name ${nome da sua aplicação}
+```
+
+Caso a aplicação já esteja em produção, para publicar uma atualização basta dar build na aplicação novamente e reiniciar usando o pm2
+```sh
+cd ${pasta do repositório da sua aplicação}
+git pull
+pm2 stop ${nome da sua aplicação}
+dotnet publish -c Release
+pm2 reload ${nome da sua aplicação}
 ```
 
 Em seguida verifique no PM2 se a sua aplicação esta rodando corretamenta:
@@ -155,7 +164,7 @@ location / {
 }
 
 location /api/ {
-        proxy_pass http://127.0.0.1:18919/;
+        proxy_pass http://127.0.0.1:${porta da sua aplicação}/;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Conecction keep-alive;
