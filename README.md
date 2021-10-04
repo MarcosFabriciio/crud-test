@@ -4,7 +4,7 @@ Pacotes e ferramentas necessárias para deploy da aplicação e API.
 
 | Plugin | README |
 | ------ | ------ |
-| .Net SDK | https://dotnet.microsoft.com/download/dotnet/3.1|
+| .Net SDK | https://dotnet.microsoft.com/download/dotnet/3.1 ```sh{o número pode ser alterado de acordo com a versão do app}```|
 | NodeJS | https://nodejs.org/en/download/|
 | Nginx | http://nginx.org/en/download.html|
 | PM2 | https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/|
@@ -74,7 +74,7 @@ sudo mysql_secure_installation
 | Remove test database and access to it? | y |
 | Reload privilege table now? | y |
 
-Em seguida acesse o mysql e altere a senha do root, saia e então reinicie o Sql Server:
+Em seguida acesse o mysql e altere a senha do root, saia e então reinicie o serviço do MySql:
 
 ```sh
 mysql -u root
@@ -110,7 +110,9 @@ Utilize os comandos abaixo para dar build na sua API:
 git clone ${url do repositório da sua aplicação}
 cd ${pasta do repositório da sua aplicação}
 dotnet publish -c Release
-cd /obj/Release/netcoreapp3.1/ 
+cd /bin/Release/netcoreapp3.1/
+ou
+cd /bin/Release/net5.0/publish/ dependendo da versão do app
 pm2 start “dotnet ${nome da sua aplicação}.dll --urls=http://*:${porta da sua aplicação}” –name ${nome da sua aplicação}
 ```
 
