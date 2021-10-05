@@ -1,9 +1,9 @@
 name: Continous Delivery ReactJS
 on:
   push:
-    branches: [ master ]
+    branches: [ development ]
   pull_request:
-    branches: [ master ]
+    branches: [ development ]
 
   workflow_dispatch:
 
