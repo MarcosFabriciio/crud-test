@@ -65,7 +65,7 @@ dotnet publish -c Release
 cd /bin/Release/netcoreapp3.1/publish/
 ou
 cd /bin/Release/net5.0/publish/ dependendo da versão do app
-pm2 start “dotnet ${nome da sua aplicação}.dll --urls=http://*:${porta da sua aplicação}” –name ${nome da sua aplicação}
+pm2 start “dotnet ${nome da sua aplicação}.dll --urls=http://*:${porta da sua aplicação}” –-name ${nome da sua aplicação}
 ```
 
 Caso a aplicação já esteja em produção, para publicar uma atualização basta dar build na aplicação novamente e reiniciar usando o pm2
